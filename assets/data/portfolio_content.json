@@ -1,0 +1,79 @@
+{
+  "profile": {
+    "name": "Абели Берулава",
+    "role": {
+      "ru": "Flutter-разработчик",
+      "en": "Flutter Developer"
+    },
+    "summary": {
+      "ru": "Делаю быстрые мобильные и веб-приложения на Flutter с фокусом на понятный UI и стабильный код.",
+      "en": "I build fast mobile and web apps with Flutter, focused on clear UI and stable code."
+    },
+    "about": {
+      "ru": "Я разрабатываю приложения под iOS, Android и Web. Люблю чистую архитектуру, автоматизацию через CI/CD и аккуратный интерфейс. Помогаю запускать продукты от идеи до продакшена.",
+      "en": "I develop apps for iOS, Android, and Web. I care about clean architecture, CI/CD automation, and polished interfaces. I help ship products from idea to production."
+    },
+    "location": "Moscow, Russia",
+    "email": "hello@example.com",
+    "links": {
+      "GitHub": "https://github.com/your-username",
+      "LinkedIn": "https://linkedin.com/in/your-profile",
+      "Telegram": "https://t.me/your_username"
+    }
+  },
+  "skills": [
+    "Flutter",
+    "Dart",
+    "Firebase",
+    "REST API",
+    "GitHub Actions",
+    "CI/CD",
+    "Clean Architecture",
+    "Figma to Flutter"
+  ],
+  "projects": [
+    {
+      "title": "Portfolio Website",
+      "description": {
+        "ru": "Личный сайт-визитка на Flutter Web с мультиязычностью и внешним JSON-контентом.",
+        "en": "Personal Flutter Web portfolio with localization and external JSON content."
+      },
+      "stack": [
+        "Flutter Web",
+        "GitHub Pages",
+        "GitHub Actions"
+      ],
+      "url": "https://github.com/your-username/portfolio_flutter"
+    },
+    {
+      "title": "Task Manager App",
+      "description": {
+        "ru": "Кросс-платформенный трекер задач с оффлайн режимом и синхронизацией.",
+        "en": "Cross-platform task tracker with offline mode and sync."
+      },
+      "stack": [
+        "Flutter",
+        "SQLite",
+        "Bloc"
+      ],
+      "url": "https://github.com/your-username/task-manager"
+    },
+    {
+      "title": "Fitness Tracker",
+      "description": {
+        "ru": "Приложение для трекинга тренировок и прогресса с красивой аналитикой.",
+        "en": "Workout and progress tracker with polished analytics dashboard."
+      },
+      "stack": [
+        "Flutter",
+        "Firebase",
+        "Cloud Functions"
+      ],
+      "url": "https://github.com/your-username/fitness-tracker"
+    }
+  ],
+  "contactMessage": {
+    "ru": "Открыт к удаленной работе и проектам на Flutter. Пишите, если нужен быстрый и надежный запуск.",
+    "en": "Open to remote work and Flutter projects. Reach out if you need a fast and reliable launch."
+  }
+}
