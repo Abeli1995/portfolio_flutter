@@ -53,13 +53,18 @@ class PortfolioPage extends StatelessWidget {
                       _HeroCard(
                         content: content,
                         locale: locale,
-                        onTapEmail: () => _copyEmail(context),
-                        onOpenLink: (url) => _openExternal(context, url),
+                        onTapTelegram: () => _openExternal(
+                          context,
+                          content.profile.links['Telegram'] ??
+                              content.profile.links['telegram'] ??
+                              '',
+                        ),
                       ),
                       const SizedBox(height: 16),
                       if (compact)
                         Column(
                           children: [
+                            // Обо мне
                             _AboutCard(
                               text: localizedValue(
                                 content.profile.about,
@@ -68,10 +73,8 @@ class PortfolioPage extends StatelessWidget {
                               locale: locale,
                             ),
                             const SizedBox(height: 16),
-                            _SkillsCard(
-                              skills: content.skills,
-                              locale: locale,
-                            ),
+                            // Навыки
+                            _SkillsCard(skills: content.skills, locale: locale),
                           ],
                         )
                       else
@@ -97,6 +100,7 @@ class PortfolioPage extends StatelessWidget {
                           ],
                         ),
                       const SizedBox(height: 16),
+                      // Проекты
                       _ProjectsCard(
                         projects: content.projects,
                         locale: locale,
@@ -149,10 +153,7 @@ class PortfolioPage extends StatelessWidget {
 }
 
 class _TopBar extends StatelessWidget {
-  const _TopBar({
-    required this.locale,
-    required this.onLocaleChanged,
-  });
+  const _TopBar({required this.locale, required this.onLocaleChanged});
 
   final Locale locale;
   final ValueChanged<Locale> onLocaleChanged;
@@ -195,17 +196,20 @@ class _HeroCard extends StatelessWidget {
   const _HeroCard({
     required this.content,
     required this.locale,
-    required this.onTapEmail,
-    required this.onOpenLink,
+    required this.onTapTelegram,
   });
 
   final PortfolioContent content;
   final Locale locale;
-  final VoidCallback onTapEmail;
-  final ValueChanged<String> onOpenLink;
+  final VoidCallback onTapTelegram;
 
   @override
   Widget build(BuildContext context) {
+    final telegramUrl =
+        content.profile.links['Telegram'] ??
+        content.profile.links['telegram'] ??
+        '';
+
     return _GlassCard(
       child: Padding(
         padding: const EdgeInsets.all(24),
@@ -244,26 +248,13 @@ class _HeroCard extends StatelessWidget {
                   label:
                       '${tr(locale, 'location')}: ${content.profile.location}',
                 ),
-                _MetaChip(
-                  icon: Icons.mail_outline,
-                  label: '${tr(locale, 'email')}: ${content.profile.email}',
-                  onTap: onTapEmail,
-                ),
+                if (telegramUrl.isNotEmpty)
+                  _MetaChip(
+                    icon: Icons.open_in_new,
+                    label: 'Telegram',
+                    onTap: onTapTelegram,
+                  ),
               ],
-            ),
-            const SizedBox(height: 16),
-            Wrap(
-              spacing: 10,
-              runSpacing: 10,
-              children: content.profile.links.entries
-                  .map(
-                    (entry) => OutlinedButton.icon(
-                      icon: const Icon(Icons.open_in_new, size: 18),
-                      label: Text('${tr(locale, 'open_link')} ${entry.key}'),
-                      onPressed: () => onOpenLink(entry.value),
-                    ),
-                  )
-                  .toList(growable: false),
             ),
           ],
         ),
@@ -347,6 +338,7 @@ class _SkillsCard extends StatelessWidget {
   }
 }
 
+/// Карточка с проектами
 class _ProjectsCard extends StatelessWidget {
   const _ProjectsCard({
     required this.projects,
@@ -389,7 +381,7 @@ class _ProjectsCard extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                project.title,
+                                localizedValue(project.title, locale),
                                 style: Theme.of(context).textTheme.titleMedium
                                     ?.copyWith(fontWeight: FontWeight.w700),
                               ),

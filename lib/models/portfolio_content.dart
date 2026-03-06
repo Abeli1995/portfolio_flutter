@@ -92,14 +92,17 @@ class ProjectItem {
     required this.url,
   });
 
-  final String title;
+  final LocalizedText title;
   final LocalizedText description;
   final List<String> stack;
   final String url;
 
   factory ProjectItem.fromJson(Map<String, dynamic> json) {
     return ProjectItem(
-      title: _asString(json['title'], fallback: 'Untitled project'),
+      title: _asLocalizedText(
+        json['title'],
+        fallback: 'Untitled project',
+      ),
       description: _asLocalizedText(
         json['description'],
         fallback: 'No description.',
