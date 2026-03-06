@@ -35,7 +35,6 @@ class PortfolioPage extends StatelessWidget {
           child: Column(
             children: [
               _TopBar(
-                name: content.profile.name,
                 locale: locale,
                 onLocaleChanged: onLocaleChanged,
               ),
@@ -150,12 +149,10 @@ class PortfolioPage extends StatelessWidget {
 
 class _TopBar extends StatelessWidget {
   const _TopBar({
-    required this.name,
     required this.locale,
     required this.onLocaleChanged,
   });
 
-  final String name;
   final Locale locale;
   final ValueChanged<Locale> onLocaleChanged;
 
@@ -166,13 +163,15 @@ class _TopBar extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: Text(
-              name,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.w800,
-                letterSpacing: 0.3,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: ClipOval(
+                child: Image.asset(
+                  'assets/images/my_photo.png',
+                  width: 36,
+                  height: 36,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
