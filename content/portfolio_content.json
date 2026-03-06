@@ -2,8 +2,8 @@
   "profile": {
     "name": "Абели Берулава",
     "role": {
-      "ru": "Flutter-разработчик",
-      "en": "Flutter Developer"
+      "ru": "Mobile developer (Flutter)",
+      "en": "Mobile developer (Flutter)"
     },
     "summary": {
       "ru": "Делаю быстрые мобильные и веб-приложения на Flutter с фокусом на понятный UI и стабильный код.",
@@ -14,11 +14,11 @@
       "en": "I develop apps for iOS, Android, and Web. I care about clean architecture, CI/CD automation, and polished interfaces. I help ship products from idea to production."
     },
     "location": "Moscow, Russia",
-    "email": "hello@example.com",
+    "email": "beru4lover@gmail.com",
     "links": {
-      "GitHub": "https://github.com/your-username",
-      "LinkedIn": "https://linkedin.com/in/your-profile",
-      "Telegram": "https://t.me/your_username"
+      "GitHub": "https://github.com/Abeli1995",
+      "LinkedIn": "https://www.linkedin.com/in/abeli-berulava-015043270/",
+      "Telegram": "https://t.me/abeli25"
     }
   },
   "skills": [
@@ -29,7 +29,7 @@
     "GitHub Actions",
     "CI/CD",
     "Clean Architecture",
-    "Figma to Flutter"
+    "Figma"
   ],
   "projects": [
     {
@@ -46,30 +46,59 @@
       "url": "https://github.com/your-username/portfolio_flutter"
     },
     {
-      "title": "Task Manager App",
+      "title": {
+        "ru": "Книжные маяки",
+        "en": "Book Lighthouses"
+      },
       "description": {
-        "ru": "Кросс-платформенный трекер задач с оффлайн режимом и синхронизацией.",
-        "en": "Cross-platform task tracker with offline mode and sync."
+        "ru": "Приложение объединяет читателей, авторов и спикеров фестиваля «Книжные маяки России». ",
+        "en": "The app brings together readers, authors, and speakers from the Book Lighthouses of Russia festival."
       },
       "stack": [
         "Flutter",
         "SQLite",
-        "Bloc"
+        "Bloc",
+        "Cubit",
+        "Firebase"
       ],
-      "url": "https://github.com/your-username/task-manager"
+      "url": "https://play.google.com/store/apps/details?id=ru.vedomosti.android&hl=ru"
     },
     {
-      "title": "Fitness Tracker",
+      "title": {
+        "ru": "Ведомости",
+        "en": "Vedomosti"
+      },
       "description": {
-        "ru": "Приложение для трекинга тренировок и прогресса с красивой аналитикой.",
-        "en": "Workout and progress tracker with polished analytics dashboard."
+        "ru": "Ведущая российская ежедневная деловая газета, основанная в 1999 году. Издание специализируется на аналитике экономических, финансовых, корпоративных и политических событий, ориентируясь на предпринимателей и топ-менеджеров. Газета была создана при участии Financial Times и The Wall Street Journal.",
+        "en": "A leading Russian daily business newspaper, founded in 1999, it specializes in analysis of economic, financial, corporate, and political events, targeting entrepreneurs and top managers"
+      },
+      "stack": [
+        "Flutter",
+        "SQLite",
+        "Bloc",
+        "Clean Architecture",
+        "OOP"
+      ],
+      "url": "https://play.google.com/store/apps/details?id=ru.vedomosti.android&hl=ru"
+    },
+    {
+      "title": {
+        "ru": "Энергогарант",
+        "en": "Energogarant"
+      },
+      "description": {
+        "ru": "Универсальная страховая компания, входящая в топ-15 страховщиков РФ. Обладает высоким рейтингом надежности «ruAA-» от «Эксперт РА».",
+        "en": "A universal insurance company, ranked among the top 15 insurers in Russia."
       },
       "stack": [
         "Flutter",
         "Firebase",
-        "Cloud Functions"
+        "Cloud Functions",
+        "Clean Architecture",
+        "OOP",
+        "Design Patterns"
       ],
-      "url": "https://github.com/your-username/fitness-tracker"
+      "url": "https://play.google.com/store/apps/details?id=ru.energogarant.android&hl=ru"
     }
   ],
   "contactMessage": {
