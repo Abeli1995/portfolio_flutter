@@ -10,10 +10,14 @@ class PortfolioApp extends StatefulWidget {
     super.key,
     required this.locale,
     required this.onLocaleChanged,
+    required this.themeMode,
+    required this.onThemeModeChanged,
   });
 
   final Locale locale;
   final ValueChanged<Locale> onLocaleChanged;
+  final ThemeMode themeMode;
+  final ValueChanged<ThemeMode> onThemeModeChanged;
 
   @override
   State<PortfolioApp> createState() => _PortfolioAppState();
@@ -62,6 +66,8 @@ class _PortfolioAppState extends State<PortfolioApp> {
           content: snapshot.data!,
           locale: widget.locale,
           onLocaleChanged: widget.onLocaleChanged,
+          themeMode: widget.themeMode,
+          onThemeModeChanged: widget.onThemeModeChanged,
         );
       },
     );

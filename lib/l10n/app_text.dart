@@ -28,6 +28,7 @@ const Map<String, Map<String, String>> _texts = {
   'open_project': {'ru': 'Открыть проект', 'en': 'Open project'},
   'open_link': {'ru': 'Открыть', 'en': 'Open'},
   'language': {'ru': 'Язык', 'en': 'Language'},
+  'theme': {'ru': 'Тема', 'en': 'Theme'},
   'copied_email': {
     'ru': 'Email скопирован в буфер обмена',
     'en': 'Email copied to clipboard',

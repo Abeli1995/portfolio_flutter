@@ -14,6 +14,7 @@ class PortfolioRoot extends StatefulWidget {
 
 class _PortfolioRootState extends State<PortfolioRoot> {
   Locale _locale = const Locale('ru');
+  ThemeMode _themeMode = ThemeMode.light;
 
   void _changeLocale(Locale locale) {
     if (_locale.languageCode == locale.languageCode) {
@@ -21,6 +22,15 @@ class _PortfolioRootState extends State<PortfolioRoot> {
     }
     setState(() {
       _locale = locale;
+    });
+  }
+
+  void _changeThemeMode(ThemeMode mode) {
+    if (_themeMode == mode) {
+      return;
+    }
+    setState(() {
+      _themeMode = mode;
     });
   }
 
@@ -35,15 +45,28 @@ class _PortfolioRootState extends State<PortfolioRoot> {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF0E7490),
-          brightness: Brightness.light,
-        ),
-        scaffoldBackgroundColor: const Color(0xFFF7FAFC),
+      theme: _buildTheme(Brightness.light),
+      darkTheme: _buildTheme(Brightness.dark),
+      themeMode: _themeMode,
+      home: PortfolioApp(
+        locale: _locale,
+        onLocaleChanged: _changeLocale,
+        themeMode: _themeMode,
+        onThemeModeChanged: _changeThemeMode,
       ),
-      home: PortfolioApp(locale: _locale, onLocaleChanged: _changeLocale),
+    );
+  }
+
+  ThemeData _buildTheme(Brightness brightness) {
+    return ThemeData(
+      useMaterial3: true,
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: const Color(0xFF0E7490),
+        brightness: brightness,
+      ),
+      scaffoldBackgroundColor: brightness == Brightness.light
+          ? const Color(0xFFF7FAFC)
+          : const Color(0xFF0B1120),
     );
   }
 }

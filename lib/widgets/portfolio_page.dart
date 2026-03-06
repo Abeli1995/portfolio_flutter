@@ -11,24 +11,40 @@ class PortfolioPage extends StatelessWidget {
     required this.content,
     required this.locale,
     required this.onLocaleChanged,
+    required this.themeMode,
+    required this.onThemeModeChanged,
   });
 
   final PortfolioContent content;
   final Locale locale;
   final ValueChanged<Locale> onLocaleChanged;
+  final ThemeMode themeMode;
+  final ValueChanged<ThemeMode> onThemeModeChanged;
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
     final compact = width < 900;
+    final colorScheme = Theme.of(context).colorScheme;
+    final isDark = colorScheme.brightness == Brightness.dark;
 
     return Scaffold(
       body: DecoratedBox(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [Color(0xFFE6FFFA), Color(0xFFF8FAFC), Color(0xFFFFF7ED)],
+            colors: isDark
+                ? const [
+                    Color(0xFF0B1120),
+                    Color(0xFF0F172A),
+                    Color(0xFF1E293B),
+                  ]
+                : const [
+                    Color(0xFFE6FFFA),
+                    Color(0xFFF8FAFC),
+                    Color(0xFFFFF7ED),
+                  ],
           ),
         ),
         child: SafeArea(
@@ -42,6 +58,8 @@ class PortfolioPage extends StatelessWidget {
                 child: _TopBar(
                   locale: locale,
                   onLocaleChanged: onLocaleChanged,
+                  themeMode: themeMode,
+                  onThemeModeChanged: onThemeModeChanged,
                 ),
               ),
               Expanded(
@@ -153,13 +171,26 @@ class PortfolioPage extends StatelessWidget {
 }
 
 class _TopBar extends StatelessWidget {
-  const _TopBar({required this.locale, required this.onLocaleChanged});
+  const _TopBar({
+    required this.locale,
+    required this.onLocaleChanged,
+    required this.themeMode,
+    required this.onThemeModeChanged,
+  });
 
   final Locale locale;
   final ValueChanged<Locale> onLocaleChanged;
+  final ThemeMode themeMode;
+  final ValueChanged<ThemeMode> onThemeModeChanged;
 
   @override
   Widget build(BuildContext context) {
+    final resolvedThemeMode = themeMode == ThemeMode.system
+        ? (Theme.of(context).brightness == Brightness.dark
+              ? ThemeMode.dark
+              : ThemeMode.light)
+        : themeMode;
+
     return Row(
       children: [
         ClipOval(
@@ -170,22 +201,70 @@ class _TopBar extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        const Spacer(),
-        Text(
-          tr(locale, 'language'),
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
-        const SizedBox(width: 8),
-        SegmentedButton<String>(
-          showSelectedIcon: false,
-          segments: const [
-            ButtonSegment<String>(value: 'ru', label: Text('RU')),
-            ButtonSegment<String>(value: 'en', label: Text('EN')),
-          ],
-          selected: <String>{locale.languageCode},
-          onSelectionChanged: (value) {
-            onLocaleChanged(Locale(value.first));
-          },
+        const SizedBox(width: 12),
+        Expanded(
+          child: Wrap(
+            alignment: WrapAlignment.end,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 16,
+            runSpacing: 8,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    tr(locale, 'language'),
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  const SizedBox(width: 8),
+                  SegmentedButton<String>(
+                    showSelectedIcon: false,
+                    segments: const [
+                      ButtonSegment<String>(value: 'ru', label: Text('RU')),
+                      ButtonSegment<String>(value: 'en', label: Text('EN')),
+                    ],
+                    selected: <String>{locale.languageCode},
+                    onSelectionChanged: (value) {
+                      if (value.isEmpty) {
+                        return;
+                      }
+                      onLocaleChanged(Locale(value.first));
+                    },
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    tr(locale, 'theme'),
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  const SizedBox(width: 8),
+                  SegmentedButton<ThemeMode>(
+                    showSelectedIcon: false,
+                    segments: const [
+                      ButtonSegment<ThemeMode>(
+                        value: ThemeMode.light,
+                        icon: Icon(Icons.light_mode),
+                      ),
+                      ButtonSegment<ThemeMode>(
+                        value: ThemeMode.dark,
+                        icon: Icon(Icons.dark_mode),
+                      ),
+                    ],
+                    selected: <ThemeMode>{resolvedThemeMode},
+                    onSelectionChanged: (value) {
+                      if (value.isEmpty) {
+                        return;
+                      }
+                      onThemeModeChanged(value.first);
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ],
     );
@@ -219,7 +298,7 @@ class _HeroCard extends StatelessWidget {
             Text(
               localizedValue(content.profile.role, locale),
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: const Color(0xFF0E7490),
+                color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -326,7 +405,9 @@ class _SkillsCard extends StatelessWidget {
                     (skill) => Chip(
                       label: Text(skill),
                       side: BorderSide.none,
-                      backgroundColor: const Color(0xFFE2E8F0),
+                      backgroundColor: Theme.of(
+                        context,
+                      ).colorScheme.surfaceVariant,
                     ),
                   )
                   .toList(growable: false),
@@ -374,7 +455,7 @@ class _ProjectsCard extends StatelessWidget {
                       width: 320,
                       child: Card(
                         elevation: 0,
-                        color: const Color(0xFFFFFFFF),
+                        color: Theme.of(context).colorScheme.surface,
                         child: Padding(
                           padding: const EdgeInsets.all(16),
                           child: Column(
@@ -404,9 +485,9 @@ class _ProjectsCard extends StatelessWidget {
                                       (tech) => Chip(
                                         label: Text(tech),
                                         side: BorderSide.none,
-                                        backgroundColor: const Color(
-                                          0xFFECFEFF,
-                                        ),
+                                        backgroundColor: Theme.of(
+                                          context,
+                                        ).colorScheme.secondaryContainer,
                                       ),
                                     )
                                     .toList(growable: false),
@@ -504,7 +585,7 @@ class _MetaChip extends StatelessWidget {
       avatar: Icon(icon, size: 18),
       label: Text(label),
       onPressed: onTap,
-      backgroundColor: const Color(0xFFE2E8F0),
+      backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
       side: BorderSide.none,
     );
   }
@@ -517,11 +598,18 @@ class _GlassCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final isDark = colorScheme.brightness == Brightness.dark;
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-        color: Colors.white.withValues(alpha: 0.9),
-        border: Border.all(color: const Color(0xFFD1FAE5)),
+        color: colorScheme.surface.withValues(alpha: isDark ? 0.75 : 0.9),
+        border: Border.all(
+          color: colorScheme.outlineVariant.withValues(
+            alpha: isDark ? 0.45 : 0.6,
+          ),
+        ),
       ),
       child: child,
     );
