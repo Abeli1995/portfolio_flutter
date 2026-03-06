@@ -34,81 +34,82 @@ class PortfolioPage extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: [
-              _TopBar(
-                locale: locale,
-                onLocaleChanged: onLocaleChanged,
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 12,
+                ),
+                child: _TopBar(
+                  locale: locale,
+                  onLocaleChanged: onLocaleChanged,
+                ),
               ),
               Expanded(
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
-                  child: Center(
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 1100),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          _HeroCard(
-                            content: content,
-                            locale: locale,
-                            onTapEmail: () => _copyEmail(context),
-                            onOpenLink: (url) => _openExternal(context, url),
-                          ),
-                          const SizedBox(height: 16),
-                          if (compact)
-                            Column(
-                              children: [
-                                _AboutCard(
-                                  text: localizedValue(
-                                    content.profile.about,
-                                    locale,
-                                  ),
-                                  locale: locale,
-                                ),
-                                const SizedBox(height: 16),
-                                _SkillsCard(
-                                  skills: content.skills,
-                                  locale: locale,
-                                ),
-                              ],
-                            )
-                          else
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: _AboutCard(
-                                    text: localizedValue(
-                                      content.profile.about,
-                                      locale,
-                                    ),
-                                    locale: locale,
-                                  ),
-                                ),
-                                const SizedBox(width: 16),
-                                Expanded(
-                                  child: _SkillsCard(
-                                    skills: content.skills,
-                                    locale: locale,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          const SizedBox(height: 16),
-                          _ProjectsCard(
-                            projects: content.projects,
-                            locale: locale,
-                            onOpenProject: (url) => _openExternal(context, url),
-                          ),
-                          const SizedBox(height: 16),
-                          _ContactsCard(
-                            locale: locale,
-                            content: content,
-                            onTapEmail: () => _copyEmail(context),
-                            onOpenLink: (url) => _openExternal(context, url),
-                          ),
-                        ],
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      _HeroCard(
+                        content: content,
+                        locale: locale,
+                        onTapEmail: () => _copyEmail(context),
+                        onOpenLink: (url) => _openExternal(context, url),
                       ),
-                    ),
+                      const SizedBox(height: 16),
+                      if (compact)
+                        Column(
+                          children: [
+                            _AboutCard(
+                              text: localizedValue(
+                                content.profile.about,
+                                locale,
+                              ),
+                              locale: locale,
+                            ),
+                            const SizedBox(height: 16),
+                            _SkillsCard(
+                              skills: content.skills,
+                              locale: locale,
+                            ),
+                          ],
+                        )
+                      else
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: _AboutCard(
+                                text: localizedValue(
+                                  content.profile.about,
+                                  locale,
+                                ),
+                                locale: locale,
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: _SkillsCard(
+                                skills: content.skills,
+                                locale: locale,
+                              ),
+                            ),
+                          ],
+                        ),
+                      const SizedBox(height: 16),
+                      _ProjectsCard(
+                        projects: content.projects,
+                        locale: locale,
+                        onOpenProject: (url) => _openExternal(context, url),
+                      ),
+                      const SizedBox(height: 16),
+                      _ContactsCard(
+                        locale: locale,
+                        content: content,
+                        onTapEmail: () => _copyEmail(context),
+                        onOpenLink: (url) => _openExternal(context, url),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -158,42 +159,34 @@ class _TopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-      child: Row(
-        children: [
-          Expanded(
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: ClipOval(
-                child: Image.asset(
-                  'assets/images/my_photo.png',
-                  width: 36,
-                  height: 36,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+    return Row(
+      children: [
+        ClipOval(
+          child: Image.asset(
+            'assets/images/my_photo.png',
+            width: 36,
+            height: 36,
+            fit: BoxFit.cover,
           ),
-          const SizedBox(width: 12),
-          Text(
-            tr(locale, 'language'),
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-          const SizedBox(width: 8),
-          SegmentedButton<String>(
-            showSelectedIcon: false,
-            segments: const [
-              ButtonSegment<String>(value: 'ru', label: Text('RU')),
-              ButtonSegment<String>(value: 'en', label: Text('EN')),
-            ],
-            selected: <String>{locale.languageCode},
-            onSelectionChanged: (value) {
-              onLocaleChanged(Locale(value.first));
-            },
-          ),
-        ],
-      ),
+        ),
+        const Spacer(),
+        Text(
+          tr(locale, 'language'),
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
+        const SizedBox(width: 8),
+        SegmentedButton<String>(
+          showSelectedIcon: false,
+          segments: const [
+            ButtonSegment<String>(value: 'ru', label: Text('RU')),
+            ButtonSegment<String>(value: 'en', label: Text('EN')),
+          ],
+          selected: <String>{locale.languageCode},
+          onSelectionChanged: (value) {
+            onLocaleChanged(Locale(value.first));
+          },
+        ),
+      ],
     );
   }
 }
