@@ -89,25 +89,25 @@ class ProjectItem {
     required this.title,
     required this.description,
     required this.stack,
+    required this.responsibilities,
     required this.url,
   });
 
   final LocalizedText title;
   final LocalizedText description;
   final List<String> stack;
+  final List<LocalizedText> responsibilities;
   final String url;
 
   factory ProjectItem.fromJson(Map<String, dynamic> json) {
     return ProjectItem(
-      title: _asLocalizedText(
-        json['title'],
-        fallback: 'Untitled project',
-      ),
+      title: _asLocalizedText(json['title'], fallback: 'Untitled project'),
       description: _asLocalizedText(
         json['description'],
         fallback: 'No description.',
       ),
       stack: _asList(json['stack']).map((item) => item.toString()).toList(),
+      responsibilities: _asLocalizedTextList(json['responsibilities']),
       url: _asString(json['url']),
     );
   }
@@ -162,4 +162,29 @@ LocalizedText _asLocalizedText(dynamic value, {required String fallback}) {
   }
 
   return {'ru': fallback, 'en': fallback};
+}
+
+List<LocalizedText> _asLocalizedTextList(dynamic value) {
+  if (value is! List) {
+    return const [];
+  }
+
+  final result = <LocalizedText>[];
+  for (final item in value) {
+    final text = _asLocalizedText(item, fallback: '');
+    final normalized = <String, String>{};
+    text.forEach((key, value) {
+      final trimmed = value.trim();
+      if (trimmed.isNotEmpty) {
+        normalized[key] = trimmed;
+      }
+    });
+    if (normalized.isNotEmpty) {
+      normalized.putIfAbsent('en', () => normalized.values.first);
+      normalized.putIfAbsent('ru', () => normalized['en']!);
+      result.add(normalized);
+    }
+  }
+
+  return result;
 }

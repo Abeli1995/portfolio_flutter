@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../l10n/app_text.dart';
 import '../models/portfolio_content.dart';
+import 'project_details_dialog.dart';
 
 class PortfolioPage extends StatelessWidget {
   const PortfolioPage({
@@ -493,12 +494,45 @@ class _ProjectsCard extends StatelessWidget {
                                     .toList(growable: false),
                               ),
                               const SizedBox(height: 12),
-                              if (project.url.trim().isNotEmpty)
-                                FilledButton.tonalIcon(
-                                  onPressed: () => onOpenProject(project.url),
-                                  icon: const Icon(Icons.open_in_new),
-                                  label: Text(tr(locale, 'open_project')),
-                                ),
+                              Builder(
+                                builder: (context) {
+                                  final hasUrl = project.url.trim().isNotEmpty;
+                                  final hasResponsibilities =
+                                      project.responsibilities.isNotEmpty;
+                                  if (!hasUrl && !hasResponsibilities) {
+                                    return const SizedBox.shrink();
+                                  }
+
+                                  return Wrap(
+                                    spacing: 8,
+                                    runSpacing: 8,
+                                    children: [
+                                      if (hasResponsibilities)
+                                        FilledButton.icon(
+                                          onPressed: () =>
+                                              ProjectDetailsDialog.show(
+                                                context: context,
+                                                project: project,
+                                                locale: locale,
+                                              ),
+                                          icon: const Icon(Icons.info_outline),
+                                          label: Text(
+                                            tr(locale, 'project_details'),
+                                          ),
+                                        ),
+                                      if (hasUrl)
+                                        FilledButton.tonalIcon(
+                                          onPressed: () =>
+                                              onOpenProject(project.url),
+                                          icon: const Icon(Icons.open_in_new),
+                                          label: Text(
+                                            tr(locale, 'open_project'),
+                                          ),
+                                        ),
+                                    ],
+                                  );
+                                },
+                              ),
                             ],
                           ),
                         ),

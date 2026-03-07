@@ -10,7 +10,7 @@
       "en": "I build fast mobile and web apps with Flutter, focused on clear UI and stable code."
     },
     "about": {
-      "ru": "Я разрабатываю приложения под iOS, Android и Web. Люблю чистую архитектуру, автоматизацию через CI/CD и аккуратный интерфейс. Помогаю запускать продукты от идеи до продакшена.",
+      "ru": "Разрабатываю приложения под iOS, Android и Web. Люблю чистую архитектуру, автоматизацию через CI/CD и аккуратный интерфейс. Помогаю запускать продукты от идеи до продакшена.",
       "en": "I develop apps for iOS, Android, and Web. I care about clean architecture, CI/CD automation, and polished interfaces. I help ship products from idea to production."
     },
     "location": "Moscow, Russia",
@@ -33,17 +33,41 @@
   ],
   "projects": [
     {
-      "title": "Portfolio Website",
-      "description": {
-        "ru": "Личный сайт-визитка на Flutter Web с мультиязычностью и внешним JSON-контентом.",
-        "en": "Personal Flutter Web portfolio with localization and external JSON content."
+      "title": {
+        "ru": "Энергогарант",
+        "en": "Energogarant"
       },
-      "stack": [
-        "Flutter Web",
-        "GitHub Pages",
-        "GitHub Actions"
+      "description": {
+        "ru": "Универсальная страховая компания, входящая в топ-15 страховщиков РФ. Обладает высоким рейтингом надежности «ruAA-» от «Эксперт РА».",
+        "en": "A universal insurance company, ranked among the top 15 insurers in Russia."
+      },
+      "responsibilities": [
+        {
+          "ru": "Спроектировал архитектуру и доменную модель приложения.",
+          "en": "Designed the app architecture and domain model."
+        },
+        {
+          "ru": "Интегрировал Firebase и Cloud Functions для серверной логики.",
+          "en": "Integrated Firebase and Cloud Functions for backend logic."
+        },
+        {
+          "ru": "Реализовал ключевые сценарии оформления страховых продуктов.",
+          "en": "Implemented key flows for insurance product onboarding."
+        },
+        {
+          "ru": "Настроил взаимодействие с аналитикой и логированием.",
+          "en": "Set up analytics and logging integrations."
+        }
       ],
-      "url": "https://github.com/your-username/portfolio_flutter"
+      "stack": [
+        "Flutter",
+        "Firebase",
+        "Cloud Functions",
+        "Clean Architecture",
+        "OOP",
+        "Design Patterns"
+      ],
+      "url": "https://play.google.com/store/apps/details?id=ru.energogarant.android&hl=ru"
     },
     {
       "title": {
@@ -54,6 +78,32 @@
         "ru": "Приложение объединяет читателей, авторов и спикеров фестиваля «Книжные маяки России». ",
         "en": "The app brings together readers, authors, and speakers from the Book Lighthouses of Russia festival."
       },
+      "responsibilities": [
+        {
+          "ru": "Выпуск приложений в App Store и Google Play.",
+          "en": "Release of applications in the App Store and Google Play."
+        },
+        {
+          "ru": "Разработал ключевые экраны и навигацию приложения.",
+          "en": "Built core screens and the navigation flow."
+        },
+        {
+          "ru": "Интегрировал Firebase и аналитику событий.",
+          "en": "Integrated Firebase services and event analytics."
+        },
+        {
+          "ru": "Реализовал локальное хранение данных и офлайн-режим на SQLite.",
+          "en": "Implemented local data storage and offline mode with SQLite."
+        },
+        {
+          "ru": "Настроил управление состоянием через Bloc/Cubit.",
+          "en": "Managed app state with Bloc/Cubit."
+        },
+        {
+          "ru": "Взаимодействие с командой backend-разработчиков и обсуждение решений с дизайнерами.",
+          "en": "Collaborated with the backend development team and discussed solutions with designers."
+        }
+      ],
       "stack": [
         "Flutter",
         "SQLite",
@@ -72,6 +122,24 @@
         "ru": "Ведущая российская ежедневная деловая газета, основанная в 1999 году. Издание специализируется на аналитике экономических, финансовых, корпоративных и политических событий, ориентируясь на предпринимателей и топ-менеджеров. Газета была создана при участии Financial Times и The Wall Street Journal.",
         "en": "A leading Russian daily business newspaper, founded in 1999, it specializes in analysis of economic, financial, corporate, and political events, targeting entrepreneurs and top managers"
       },
+      "responsibilities": [
+        {
+          "ru": "Участвовал в развитии архитектуры приложения и разделении модулей.",
+          "en": "Contributed to the app architecture and module separation."
+        },
+        {
+          "ru": "Интегрировал API, кеширование и работу в офлайн-режиме.",
+          "en": "Integrated APIs, caching, and offline support."
+        },
+        {
+          "ru": "Оптимизировал производительность и стабильность приложения.",
+          "en": "Optimized app performance and stability."
+        },
+        {
+          "ru": "Развивал UI и поддерживал актуальность фич.",
+          "en": "Evolved the UI and maintained feature parity."
+        }
+      ],
       "stack": [
         "Flutter",
         "SQLite",
@@ -80,25 +148,6 @@
         "OOP"
       ],
       "url": "https://play.google.com/store/apps/details?id=ru.vedomosti.android&hl=ru"
-    },
-    {
-      "title": {
-        "ru": "Энергогарант",
-        "en": "Energogarant"
-      },
-      "description": {
-        "ru": "Универсальная страховая компания, входящая в топ-15 страховщиков РФ. Обладает высоким рейтингом надежности «ruAA-» от «Эксперт РА».",
-        "en": "A universal insurance company, ranked among the top 15 insurers in Russia."
-      },
-      "stack": [
-        "Flutter",
-        "Firebase",
-        "Cloud Functions",
-        "Clean Architecture",
-        "OOP",
-        "Design Patterns"
-      ],
-      "url": "https://play.google.com/store/apps/details?id=ru.energogarant.android&hl=ru"
     }
   ],
   "contactMessage": {
